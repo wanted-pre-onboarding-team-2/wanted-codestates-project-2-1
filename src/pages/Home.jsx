@@ -47,7 +47,9 @@ function Home() {
         <RepoSearchResult className="search-result-container">
           {repositoryList.map((value, index) => (
             <div key={index}>
-              <Link to={`/issues/${value.owner.login}`}>{value.full_name}</Link>
+              <Link to={`/issues/${value.full_name.split("/").join("-")}`}>
+                {value.full_name}
+              </Link>
             </div>
           ))}
         </RepoSearchResult>
