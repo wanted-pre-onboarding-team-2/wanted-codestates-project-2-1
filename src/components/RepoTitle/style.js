@@ -6,6 +6,7 @@ const Wrapper = styled.div`
   display: flex;
   align-items: center;
   width: fit-content;
+  height: 75px;
   border: 1px solid lightgray;
   cursor: pointer;
   border-radius: 5px;
