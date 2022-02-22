@@ -5,7 +5,7 @@ import axios from "axios";
 // components
 const RepoSearchContainer = styled.div``;
 const RepoSearchInput = styled.input``;
-const ReopSearchButton = styled.button``;
+const RepoSearchButton = styled.button``;
 const RepoSearchResult = styled.div``;
 
 function App() {
@@ -14,7 +14,6 @@ function App() {
   const [repositoryList, setRepositoryList] = useState([]);
 
   const getRepositoryData = () => {
-    console.log(userInput);
     axios
       .get("http://api.github.com/search/repositories", {
         params: {
@@ -42,9 +41,13 @@ function App() {
               setUserInput(e.target.value);
             }}
           />
-          <ReopSearchButton onClick={getRepositoryData}>검색</ReopSearchButton>
+          <RepoSearchButton onClick={getRepositoryData}>검색</RepoSearchButton>
         </div>
-        <RepoSearchResult className="search-result-container"></RepoSearchResult>
+        <RepoSearchResult className="search-result-container">
+          {repositoryList.map((value, index) => (
+            <div key={index}>{value.full_name}</div>
+          ))}
+        </RepoSearchResult>
       </RepoSearchContainer>
     </>
   );
