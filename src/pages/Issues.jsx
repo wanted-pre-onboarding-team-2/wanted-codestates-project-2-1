@@ -2,6 +2,12 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { isS } from "xmlchars/xml/1.0/ed5";
+import IssueCard from "../IssueCard";
+import styled from "styled-components";
+
+const Cards = styled.ul`
+  display: flex;
+`;
 
 function Issues() {
   const { repoInfo } = useParams();
@@ -25,12 +31,10 @@ function Issues() {
 
   return (
     <>
-      <div>[{repoInfo} ISSUES]</div>
+      <Cards>[{repoInfo} ISSUES]</Cards>
       {issues &&
         issues.map((issue, idx) => (
-          <div key={idx}>
-            {idx + 1}. {issue.title}
-          </div>
+          <IssueCard key={idx + 1} issue={issue} repoInfo={repoInfo} />
         ))}
     </>
   );
