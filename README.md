@@ -1,1 +1,1 @@
-# wanted-codestates-project-2-1
+# 원티드 프리온보딩 프론트엔드 코스 - 페이히어
