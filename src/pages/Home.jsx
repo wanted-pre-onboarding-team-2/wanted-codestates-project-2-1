@@ -1,60 +1,26 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
-import axios from "axios";
-import { Link } from "react-router-dom";
+import RepoSearch from "../Components/RepoSearch";
+const HomeWrap = styled.div`
+  display: flex;
+  justify-content: center;
 
-// components
-const RepoSearchContainer = styled.div``;
-const RepoSearchInput = styled.input``;
-const RepoSearchButton = styled.button``;
-const RepoSearchResult = styled.div``;
+  @media ${props => props.theme.mobile} {
+    background-color: aliceblue;
+  }
+`;
 
 function Home() {
-  // states
-  const [userInput, setUserInput] = useState("");
-  const [repositoryList, setRepositoryList] = useState([]);
-
-  const getRepositoryData = () => {
-    axios
-      .get("http://api.github.com/search/repositories", {
-        params: {
-          q: userInput,
-        },
-      })
-      .then(response => {
-        setRepositoryList(response.data.items);
-        console.log(response.data.items);
-        console.log(repositoryList);
-      })
-      .catch(Error => {
-        console.log(Error);
-      });
-  };
-
   return (
-    <>
-      <RepoSearchContainer>
-        <div>
-          <RepoSearchInput
-            type="text"
-            name="repositorySearch"
-            onChange={e => {
-              setUserInput(e.target.value);
-            }}
-          />
-          <RepoSearchButton onClick={getRepositoryData}>검색</RepoSearchButton>
-        </div>
-        <RepoSearchResult className="search-result-container">
-          {repositoryList.map((value, index) => (
-            <div key={index}>
-              <Link to={`/issues/${value.full_name.split("/").join("-")}`}>
-                {value.full_name}
-              </Link>
-            </div>
-          ))}
-        </RepoSearchResult>
-      </RepoSearchContainer>
-    </>
+    <HomeWrap>
+      <RepoSearch />
+      <div>
+        <h1>Registered Repo</h1>
+        <div>Repo1</div>
+        <div>Repo2</div>
+        <div>Repo3</div>
+      </div>
+    </HomeWrap>
   );
 }
 
