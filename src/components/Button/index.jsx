@@ -7,6 +7,7 @@ const Button = ({
   color = "black",
   width = 300,
   height = 50,
+  ...props
 }) => {
   return (
     <Btn
@@ -15,6 +16,7 @@ const Button = ({
       width={width}
       height={height}
       onClick={onBtnClick}
+      {...props}
     >
       {children}
     </Btn>
