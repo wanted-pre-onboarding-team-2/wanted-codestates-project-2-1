@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-const Card = styled.li`
+const Card = styled.a`
   display: block;
   list-style: none;
   background-color: lightcoral;
@@ -20,10 +20,10 @@ const RepoName = styled.h3`
 `;
 
 function IssueCard({ issue, repoInfo }) {
-  const { url, title } = issue;
+  const { html_url, title, img } = issue;
 
   return (
-    <Card>
+    <Card href={html_url}>
       <Title>{title}</Title>
       <RepoName>{repoInfo}</RepoName>
     </Card>

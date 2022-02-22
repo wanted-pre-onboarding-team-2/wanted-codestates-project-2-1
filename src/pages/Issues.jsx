@@ -5,7 +5,7 @@ import { isS } from "xmlchars/xml/1.0/ed5";
 import IssueCard from "../IssueCard";
 import styled from "styled-components";
 
-const Cards = styled.ul`
+const Cards = styled.div`
   display: flex;
 `;
 
