@@ -1,47 +1,97 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import axios from "axios";
-// components
-const RepoSearchContainer = styled.div`
-  width: 400px;
-  padding: 10px;
-`;
 
+// image
+import GitLogo from "../img/gitIcon.png";
+
+// components
+import Loader from "./Loading";
+
+const RepoSearchContainer = styled.div`
+  width: 500px;
+  padding: 20px 30px;
+`;
 const RepoSearchWrap = styled.div`
   display: flex;
   justify-content: space-between;
+  margin-bottom: 20px;
 `;
 
 const RepoSearchInput = styled.input`
   padding-left: 5px;
-  width: 90%;
+  width: 85%;
 `;
 const RepoSearchButton = styled.button`
-  margin-right: ;
+  border: 1px solid black;
+  border-radius: 5px;
+  padding: 5px 7px;
+`;
+const CountImpact = styled.span`
+  font-size: 18px;
+  font-weight: bold;
+  color: orange;
 `;
 const RepoSearchResult = styled.div`
+  height: calc(100vh - 120px);
   padding-top: 5px;
+  overflow: auto;
+  ::-webkit-scrollbar {
+    display: none;
+  }
+`;
+const GitIcon = styled.img`
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
 `;
 const RepoSearchItem = styled.div`
   border: 1px solid;
+  border-radius: 5px;
   display: flex;
   justify-content: space-between;
-  margin-bottom: 5px;
-  padding: 3px;
+  align-items: center;
+  margin-bottom: 10px;
+  padding: 5px 10px;
+`;
+const RepoSaveButton = styled.div`
+  width: 20px;
+  height: 20px;
+  border: 1px solid black;
+  border-radius: 50%;
+  text-align: center;
+  color: white;
+`;
+const MoreButton = styled.button`
+  width: 100%;
+  height: 30px;
+  text-align: center;
+  border: 1px solid black;
+  border-radius: 5px;
 `;
 const RepoSearchItemList = styled.li`
   list-style: none;
+  display: flex;
+  align-items: center;
 `;
-function RepoSearch() {
-  // states
 
+function RepoSearch() {
+  // state
   const [userInput, setUserInput] = useState("");
   const [repositoryList, setRepositoryList] = useState([]);
+  const [loadingState, setLoadingState] = useState(0);
   const [endView, setEndView] = useState(10);
+
   const getRepositoryData = () => {
+    if (userInput === "") {
+      return 0;
+    }
+
     if (endView !== 10) {
       setEndView(10);
     }
+    setLoadingState(1);
     axios
       .get("http://api.github.com/search/repositories", {
         params: {
@@ -50,18 +100,23 @@ function RepoSearch() {
       })
       .then(response => {
         setRepositoryList(response.data.items);
-        console.log(response.data.items);
-        console.log(repositoryList);
+        setLoadingState(0);
       })
       .catch(Error => {
         console.log(Error);
       });
   };
 
+  const addStyleOnItem = index => {
+    document.querySelector(`.repositoryItem-${index}`).style.background =
+      "#c9ffd2";
+    document.querySelector(`.checkMark-${index}`).style.background = "#238636";
+  };
+
   const handleMoreView = e => {
     let showMoreValue = e.target.innerText;
     if (showMoreValue === "더보기") {
-      e.target.innerText = "닫기";
+      e.target.innerText = "접기";
       setEndView(30);
     } else {
       e.target.innerText = "더보기";
@@ -84,15 +139,36 @@ function RepoSearch() {
           />
           <RepoSearchButton onClick={getRepositoryData}>검색</RepoSearchButton>
         </RepoSearchWrap>
-        <RepoSearchResult className="search-result-container">
-          {repositoryList.slice(0, endView).map((value, index) => (
-            <RepoSearchItem key={index}>
-              <RepoSearchItemList>{value.full_name}</RepoSearchItemList>
-              <button>추가</button>
-            </RepoSearchItem>
-          ))}
-          {repositoryList.length !== 0 ? (
-            <button onClick={e => handleMoreView(e)}>더보기</button>
+        <RepoSearchResult>
+          {loadingState ? (
+            <Loader />
+          ) : (
+            <>
+              {repositoryList === [] ? (
+                <div>
+                  <CountImpact>{repositoryList.length}</CountImpact> 개의 검색
+                  결과
+                </div>
+              ) : null}
+              {repositoryList.slice(0, endView).map((value, index) => (
+                <RepoSearchItem
+                  className={`repositoryItem-${index}`}
+                  key={index}
+                  onClick={() => addStyleOnItem(index)}
+                >
+                  <RepoSearchItemList>
+                    <GitIcon src={GitLogo} />
+                    <p>{value.full_name}</p>
+                  </RepoSearchItemList>
+                  <RepoSaveButton className={`checkMark-${index}`}>
+                    ✓
+                  </RepoSaveButton>
+                </RepoSearchItem>
+              ))}
+            </>
+          )}
+          {repositoryList.length > 10 ? (
+            <MoreButton onClick={e => handleMoreView(e)}>더보기</MoreButton>
           ) : null}
         </RepoSearchResult>
       </RepoSearchContainer>
