@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import { isS } from "xmlchars/xml/1.0/ed5";
-import IssueCard from "../IssueCard";
+
+import IssueCard from "../components/IssueCard";
 import styled from "styled-components";
 
 const Cards = styled.div`
