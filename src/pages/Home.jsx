@@ -2,18 +2,19 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import axios from "axios";
 import { Link } from "react-router-dom";
-
+import RepoTitle from "../components/RepoTitle";
+import { useLocalStorage } from "../hooks/useLocalStorage";
+import { verifySaveRepo } from "./verifySaveRepo";
 // components
-const RepoSearchContainer = styled.div``;
+
 const RepoSearchInput = styled.input``;
 const RepoSearchButton = styled.button``;
 const RepoSearchResult = styled.div``;
-
 function Home() {
   // states
   const [userInput, setUserInput] = useState("");
   const [repositoryList, setRepositoryList] = useState([]);
-
+  const [savedRepos, setSavedRepos] = useLocalStorage("repo", []);
   const getRepositoryData = () => {
     axios
       .get("http://api.github.com/search/repositories", {
@@ -30,31 +31,40 @@ function Home() {
         console.log(Error);
       });
   };
-
+  const saveRepo = repoName => {
+    const isValid = verifySaveRepo(savedRepos, repoName);
+    isValid && setSavedRepos([...savedRepos, repoName]);
+  };
   return (
-    <>
-      <RepoSearchContainer>
-        <div>
-          <RepoSearchInput
-            type="text"
-            name="repositorySearch"
-            onChange={e => {
-              setUserInput(e.target.value);
-            }}
+    <RepoSearchResult>
+      <div>
+        <RepoSearchInput
+          type="text"
+          name="repositorySearch"
+          onChange={e => {
+            setUserInput(e.target.value);
+          }}
+        />
+        <RepoSearchButton onClick={getRepositoryData}>검색</RepoSearchButton>
+      </div>
+
+      <RepoSearchResult className="search-result-container">
+        {repositoryList.map((value, index) => (
+          /* <div key={index}> */
+          <RepoTitle
+            title={value.full_name}
+            type="add"
+            lazy
+            threshold={0}
+            onBtnClick={() => saveRepo(value.full_name)}
           />
-          <RepoSearchButton onClick={getRepositoryData}>검색</RepoSearchButton>
-        </div>
-        <RepoSearchResult className="search-result-container">
-          {repositoryList.map((value, index) => (
-            <div key={index}>
-              <Link to={`/issues/${value.full_name.split("/").join("-")}`}>
+          /* <Link to={`/issues/${value.full_name.split("/").join("-")}`}>
                 {value.full_name}
-              </Link>
-            </div>
-          ))}
-        </RepoSearchResult>
-      </RepoSearchContainer>
-    </>
+              </Link> 
+          /* </div> */
+        ))}
+      </RepoSearchResult>
+    </RepoSearchResult>
   );
 }
 
