@@ -44,7 +44,7 @@ Enter 키와 검색 버튼을 통하여 검색을 실행할 수 있도록 구현
 
 🔥**Repository LocalStorage 등록 및 삭제**
 <br/><br/> 
-<img src="https://user-images.githubusercontent.com/89959952/155331980-6817f9c6-4ea9-4c0c-8035-ea66335e3df4.gif" width="500px" height="300px" title="local" alt="local"></img>
+<img src="https://user-images.githubusercontent.com/89959952/155350582-76cedb0d-67bb-4770-ab23-024e9ca44dd5.gif" width="500px" height="300px" title="local" alt="local"></img>
 <br/>
 - **구현한 방법과 이유**
 > 1. 검색된 Public Repository를 **등록**할 수 있다.
