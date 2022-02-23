@@ -6,20 +6,57 @@ import RepoSearch from "../components/RepoSearch";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 
 const HomeWrap = styled.div`
-  max-width: 800px;
+  max-width: 1400px;
   margin: 0 auto;
+  margin-top: 100px;
+  padding: 0 50px;
+  padding-bottom: 200px;
 `;
-const FlexBox = styled.div`
+
+const PageTitle = styled.div`
+  font-weight: bold;
+  font-size: 50px;
+  margin-bottom: 50px;
+`;
+
+const ListContainer = styled.div`
   height: 100vh;
   display: flex;
-  justify-content: center;
   flex-wrap: wrap;
-  gap: 1em;
+  gap: 50px;
 `;
+
 const RepoSave = styled.div`
   display: flex;
   flex-direction: column;
   flex-basis: 200px;
+  flex: 1;
+
+  ul {
+    list-style: none;
+  }
+
+  li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+    font-weight: bold;
+    min-width: 200px;
+
+    button {
+      background: #ff6f6f;
+      color: white;
+      padding: 5px 10px;
+      border-radius: 5px;
+    }
+  }
+
+  li + li {
+    margin-top: 10px;
+  }
 `;
 
 function Home() {
@@ -28,9 +65,11 @@ function Home() {
     const newRepo = savedRepos.filter(item => item !== name);
     setSavedRepos(newRepo);
   };
+
   return (
     <HomeWrap>
-      <FlexBox>
+      <PageTitle>Github Issue Searcher</PageTitle>
+      <ListContainer>
         <RepoSearch savedRepos={savedRepos} setSavedRepos={setSavedRepos} />
         <RepoSave>
           <ul>
@@ -45,7 +84,7 @@ function Home() {
             })}
           </ul>
         </RepoSave>
-      </FlexBox>
+      </ListContainer>
     </HomeWrap>
   );
 }
