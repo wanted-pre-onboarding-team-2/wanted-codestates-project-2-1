@@ -9,8 +9,14 @@ import GitLogo from "../img/gitIcon.png";
 import Loader from "./Loading";
 
 const RepoSearchContainer = styled.div`
-  width: 500px;
+  max-width: 500px;
   padding: 20px 30px;
+
+  @media screen and (max-width: 716px) {
+    width: 100%;
+    height: fit-content;
+    border-bottom: 1px solid black;
+  }
 `;
 const RepoSearchWrap = styled.div`
   display: flex;
@@ -38,6 +44,10 @@ const RepoSearchResult = styled.div`
   overflow: auto;
   ::-webkit-scrollbar {
     display: none;
+  }
+
+  @media screen and (max-width: 716px) {
+    height: calc(100vh - 320px);
   }
 `;
 const GitIcon = styled.img`
