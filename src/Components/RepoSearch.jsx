@@ -10,6 +10,7 @@ import Loader from "./Loading";
 
 const RepoSearchContainer = styled.div`
   max-width: 500px;
+  width: 100%;
   padding: 20px 30px;
 
   @media screen and (max-width: 716px) {
@@ -47,7 +48,7 @@ const RepoSearchResult = styled.div`
   }
 
   @media screen and (max-width: 716px) {
-    height: calc(100vh - 320px);
+    height: calc(100vh - 300px);
   }
 `;
 const GitIcon = styled.img`
@@ -164,11 +165,11 @@ function RepoSearch() {
                   <button onClick={handleSave}>추가</button>
                 </RepoSearchItem>
               ))}
+              {repositoryList.length > 10 ? (
+                <MoreButton onClick={e => handleMoreView(e)}>더보기</MoreButton>
+              ) : null}
             </>
           )}
-          {repositoryList.length > 10 ? (
-            <MoreButton onClick={e => handleMoreView(e)}>더보기</MoreButton>
-          ) : null}
         </RepoSearchResult>
       </RepoSearchContainer>
     </>
