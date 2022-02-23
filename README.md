@@ -65,7 +65,7 @@ const getIssue = () => {
 
 const setIssue = el => {
   //중복제거
-  if (JSON.parse(localStorage.getItem("repos")).length > 0) {
+  if (JSON.parse(localStorage.getItem("repos"))) {
     if (JSON.parse(localStorage.getItem("repos")).includes(el)) {
       return window.alert("이미 등록 되어 있습니다🔥");
     }
