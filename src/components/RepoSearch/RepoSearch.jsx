@@ -11,7 +11,8 @@ function RepoSearch({ savedRepos, setSavedRepos }) {
   const [repositoryList, setRepositoryList] = useState([]);
   const [loadingState, setLoadingState] = useState(0);
   const [endView, setEndView] = useState(10);
-
+  const [modalState, setModalState] = useState(false);
+  const [modalContent, setModalContent] = useState("");
   const getRepositoryData = async () => {
     try {
       const res = await axios.get(
@@ -55,11 +56,38 @@ function RepoSearch({ savedRepos, setSavedRepos }) {
 
   const handleSaveRepo = repoName => {
     const isValid = verifySaveRepo(savedRepos, repoName);
-    isValid && setSavedRepos([...savedRepos, repoName]);
+    if (isValid === "overflow") {
+      setModalContent("4개 이상 저장하실 수 없습니다. 😅");
+
+      setModalState(true);
+    } else if (isValid === "already") {
+      setModalContent("이미 저장되었습니다. 😅");
+      setModalState(true);
+    } else {
+      setSavedRepos([...savedRepos, repoName]);
+    }
   };
 
   return (
     <>
+      {modalState && (
+        <>
+          <S.ModalWrap>
+            <S.ModalCard>
+              <S.ModalContentWrap>
+                <S.ModalContent>{modalContent}</S.ModalContent>
+              </S.ModalContentWrap>
+              <S.ModalCloseBtn
+                type="button"
+                onClick={() => setModalState(false)}
+              >
+                닫기
+              </S.ModalCloseBtn>
+            </S.ModalCard>
+          </S.ModalWrap>
+          <S.modalBackground></S.modalBackground>
+        </>
+      )}
       <S.RepoSearchContainer>
         <S.RepoSearchWrap>
           <S.RepoSearchInput
