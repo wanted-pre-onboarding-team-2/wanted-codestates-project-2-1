@@ -3,7 +3,9 @@ import { useParams } from "react-router-dom";
 
 function Issues() {
   const { repoInfo } = useParams();
-  useEffect(() => {});
+  useEffect(() => {
+    console.log(repoInfo);
+  }, [repoInfo]);
 
   return <div>Repo Info {repoInfo}</div>;
 }
