@@ -33,6 +33,7 @@
 | 이름 | 깃허브 |
 | --- | --- |
 | 강동진 | [jinn2u](https://github.com/jinn2u) |
+| 박상우 | []()|
 | 신항민 | [ssinking91](https://github.com/ssinking91) |
 | 이장민 | [leo-xee](https://github.com/leo-xee) |
 | 오카무라카에 | [kaehehehe](https://github.com/kaehehehe) |
