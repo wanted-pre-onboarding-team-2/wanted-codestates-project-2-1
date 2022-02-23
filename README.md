@@ -1,5 +1,7 @@
 # 원티드 프리온보딩 프론트엔드 코스 - 페이히어
 
+결과물 : https://wanted-codestates-project-2-1.vercel.app/ 
+
 ## 사용 스택
 <p>
   <img src="https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB" />
