@@ -40,12 +40,6 @@ const PageTitle = styled.div`
   margin-bottom: 50px;
 `;
 
-const Message = styled.div`
-  width: 100%;
-  font-size: 20px;
-  text-align: start;
-`;
-
 function Issues() {
   const { repoInfo } = useParams();
   const [owner, repo] = repoInfo.split("-");
@@ -80,15 +74,11 @@ function Issues() {
       <HomeButton to="/">HOME</HomeButton>
       <Container>
         <PageTitle>{repoInfo && `${owner}/${repo}`} ISSUES</PageTitle>
-
         <CardContainer>
-          {issues ? (
+          {issues &&
             issues.map((issue, idx) => (
               <IssueCard key={idx + 1} issue={issue} repoInfo={repoInfo} />
-            ))
-          ) : (
-            <Message>there is no issue</Message>
-          )}
+            ))}
         </CardContainer>
 
         {issues && (
