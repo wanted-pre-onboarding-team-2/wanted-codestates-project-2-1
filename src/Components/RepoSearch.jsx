@@ -55,14 +55,7 @@ const RepoSearchItem = styled.div`
   margin-bottom: 10px;
   padding: 5px 10px;
 `;
-const RepoSaveButton = styled.div`
-  width: 20px;
-  height: 20px;
-  border: 1px solid black;
-  border-radius: 50%;
-  text-align: center;
-  color: white;
-`;
+
 const MoreButton = styled.button`
   width: 100%;
   height: 30px;
@@ -107,12 +100,6 @@ function RepoSearch() {
       });
   };
 
-  const addStyleOnItem = index => {
-    document.querySelector(`.repositoryItem-${index}`).style.background =
-      "#c9ffd2";
-    document.querySelector(`.checkMark-${index}`).style.background = "#238636";
-  };
-
   const handleMoreView = e => {
     let showMoreValue = e.target.innerText;
     if (showMoreValue === "더보기") {
@@ -122,6 +109,10 @@ function RepoSearch() {
       e.target.innerText = "더보기";
       setEndView(10);
     }
+  };
+
+  const handleSave = () => {
+    // TODO: LocalStoragy 추가해주세요!
   };
 
   return (
@@ -154,15 +145,13 @@ function RepoSearch() {
                 <RepoSearchItem
                   className={`repositoryItem-${index}`}
                   key={index}
-                  onClick={() => addStyleOnItem(index)}
                 >
                   <RepoSearchItemList>
                     <GitIcon src={GitLogo} />
                     <p>{value.full_name}</p>
                   </RepoSearchItemList>
-                  <RepoSaveButton className={`checkMark-${index}`}>
-                    ✓
-                  </RepoSaveButton>
+                  {/* TODO : 여기에 추가해주세요! */}
+                  <button onClick={handleSave}>추가</button>
                 </RepoSearchItem>
               ))}
             </>

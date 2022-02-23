@@ -4,10 +4,6 @@ import RepoSearch from "../Components/RepoSearch";
 const HomeWrap = styled.div`
   display: flex;
   justify-content: center;
-
-  @media ${props => props.theme.mobile} {
-    background-color: aliceblue;
-  }
 `;
 
 function Home() {
