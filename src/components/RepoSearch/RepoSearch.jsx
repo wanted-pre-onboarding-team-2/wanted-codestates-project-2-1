@@ -12,7 +12,24 @@ function RepoSearch({ savedRepos, setSavedRepos }) {
   const [loadingState, setLoadingState] = useState(0);
   const [endView, setEndView] = useState(10);
 
-  const getRepositoryData = () => {
+  const getRepositoryData = async () => {
+    try {
+      const res = await axios.get(
+        "https://api.github.com/search/repositories",
+        {
+          params: {
+            q: userInput,
+          },
+        },
+      );
+      setRepositoryList(res.data.items);
+      setLoadingState(0);
+    } catch (err) {
+      console.error(Error);
+    }
+  };
+
+  const handleSearchClick = () => {
     if (userInput === "") {
       return 0;
     }
@@ -21,19 +38,8 @@ function RepoSearch({ savedRepos, setSavedRepos }) {
       setEndView(10);
     }
     setLoadingState(1);
-    axios
-      .get("https://api.github.com/search/repositories", {
-        params: {
-          q: userInput,
-        },
-      })
-      .then(response => {
-        setRepositoryList(response.data.items);
-        setLoadingState(0);
-      })
-      .catch(Error => {
-        console.error(Error);
-      });
+
+    getRepositoryData();
   };
 
   const handleMoreView = e => {
@@ -61,12 +67,11 @@ function RepoSearch({ savedRepos, setSavedRepos }) {
             type="text"
             name="repositorySearch"
             placeholder="search..."
-            // FIXME: useRef 로 수정.
             onChange={e => {
               setUserInput(e.target.value);
             }}
           />
-          <S.RepoSearchButton onClick={getRepositoryData}>
+          <S.RepoSearchButton onClick={handleSearchClick}>
             검색
           </S.RepoSearchButton>
         </S.RepoSearchWrap>
