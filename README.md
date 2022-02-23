@@ -88,9 +88,9 @@ export { getIssue, setIssue, delIssue };
 ```
 <br>
 
-> **JSON.stringifty** : JavaScript 객체를 JSON 텍스트로 바꾸고 해당 JSON 텍스트를 문자열에 저장
-> **JSON.parse** : JSON 텍스트 문자열을 JavaScript 객체로 변환
-> 
+> - **JSON.stringifty** : JavaScript 객체를 JSON 텍스트로 바꾸고 해당 JSON 텍스트를 문자열에 저장
+> - **JSON.parse** : JSON 텍스트 문자열을 JavaScript 객체로 변환
+ 
 <br>
 
 - **구현하면서 어려웠던점과 해결**
