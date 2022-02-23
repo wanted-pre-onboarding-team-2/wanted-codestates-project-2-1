@@ -31,9 +31,14 @@ function Home() {
         console.log(Error);
       });
   };
-  const saveRepo = repoName => {
+  const handleSaveRepo = repoName => {
     const isValid = verifySaveRepo(savedRepos, repoName);
     isValid && setSavedRepos([...savedRepos, repoName]);
+  };
+
+  const handleDeleteRepo = name => {
+    const newRepo = savedRepos.filter(item => item !== name);
+    setSavedRepos(newRepo);
   };
   return (
     <RepoSearchResult>
@@ -56,7 +61,7 @@ function Home() {
             type="add"
             lazy
             threshold={0}
-            onBtnClick={() => saveRepo(value.full_name)}
+            onBtnClick={() => handleSaveRepo(value.full_name)}
           />
           /* <Link to={`/issues/${value.full_name.split("/").join("-")}`}>
                 {value.full_name}
