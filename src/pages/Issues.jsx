@@ -50,7 +50,6 @@ function Issues() {
     const res = await axios.get(
       `https://api.github.com/repos/${owner}/${repo}/issues?page=${currentPage}`,
     );
-    console.log(res.data);
     return res.data;
   };
 
