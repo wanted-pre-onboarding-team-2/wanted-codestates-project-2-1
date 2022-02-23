@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import Loader from "../Loading";
 
@@ -55,7 +55,6 @@ function RepoSearch({ savedRepos, setSavedRepos }) {
   return (
     <>
       <S.RepoSearchContainer>
-        <h1>Github issue searcher</h1>
         <S.RepoSearchWrap>
           <S.RepoSearchInput
             type="text"
