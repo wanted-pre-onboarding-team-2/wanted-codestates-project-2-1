@@ -1,13 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import axios from "axios";
-
-// image
+import { Link } from "react-router-dom";
+import { useLocalStorage } from "../hooks/useLocalStorage";
+import { verifySaveRepo } from "./verifySaveRepo";
 import GitLogo from "../img/gitIcon.png";
-
-// components
 import Loader from "./Loading";
-
 const RepoSearchContainer = styled.div`
   max-width: 500px;
   width: 100%;
@@ -80,7 +78,7 @@ const RepoSearchItemList = styled.li`
   align-items: center;
 `;
 
-function RepoSearch() {
+function RepoSearch({ savedRepos, setSavedRepos }) {
   // state
   const [userInput, setUserInput] = useState("");
   const [repositoryList, setRepositoryList] = useState([]);
@@ -122,9 +120,15 @@ function RepoSearch() {
     }
   };
 
-  const handleSave = () => {
-    // TODO: LocalStoragy 추가해주세요!
+  const handleSaveRepo = repoName => {
+    const isValid = verifySaveRepo(savedRepos, repoName);
+    isValid && setSavedRepos([...savedRepos, repoName]);
   };
+
+  useEffect(() => {
+    console.log("화면 뜸!");
+    console.log(savedRepos);
+  }, [savedRepos]);
 
   return (
     <>
@@ -162,7 +166,9 @@ function RepoSearch() {
                     <p>{value.full_name}</p>
                   </RepoSearchItemList>
                   {/* TODO : 여기에 추가해주세요! */}
-                  <button onClick={handleSave}>추가</button>
+                  <button onClick={() => handleSaveRepo(value.full_name)}>
+                    추가
+                  </button>
                 </RepoSearchItem>
               ))}
               {repositoryList.length > 10 ? (

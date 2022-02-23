@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import RepoSearch from "../Components/RepoSearch";
+import { useLocalStorage } from "../hooks/useLocalStorage";
 
 const HomeWrap = styled.div`
   max-width: 800px;
@@ -20,25 +21,24 @@ const RepoSave = styled.div`
 `;
 
 function Home() {
-  const handleSaveRepo = repoName => {
-    const isValid = verifySaveRepo(savedRepos, repoName);
-    isValid && setSavedRepos([...savedRepos, repoName]);
-  };
-
+  const [savedRepos, setSavedRepos] = useLocalStorage("repo", []);
   const handleDeleteRepo = name => {
     const newRepo = savedRepos.filter(item => item !== name);
     setSavedRepos(newRepo);
   };
-  const [savedRepos, setSavedRepos] = useLocalStorage("repo", []);
   return (
     <HomeWrap>
       <FlexBox>
-        <RepoSearch />
+        <RepoSearch savedRepos={savedRepos} setSavedRepos={setSavedRepos} />
         <RepoSave>
-          <h1>Registered Repo</h1>
-          <div>Repo1</div>
-          <div>Repo2</div>
-          <div>Repo3</div>
+          {savedRepos.map((val, idx) => (
+            <ul key={idx}>
+              <li>
+                {val}
+                <button onClick={() => handleDeleteRepo(val)}>삭제</button>
+              </li>
+            </ul>
+          ))}
         </RepoSave>
       </FlexBox>
     </HomeWrap>
