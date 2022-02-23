@@ -5,17 +5,17 @@ const Wrapper = styled.div`
   position: relative;
   display: flex;
   align-items: center;
-  width: fit-content;
+
   height: 75px;
   border: 1px solid lightgray;
   cursor: pointer;
   border-radius: 5px;
-  width: 470px;
+  width: 50%;
   padding-left: 10px;
 `;
 
 const H1 = styled.h1`
-  width: 360px;
+  width: 75%;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;

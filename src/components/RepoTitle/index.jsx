@@ -1,9 +1,8 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { useInterSectionObserver } from "../../hooks/useInterSectionObserver";
 import { Wrapper, AddBtn, H1 } from "./style";
 
 const RepoTitle = ({ title, type, onBtnClick, lazy, threshold }) => {
-  console.log(lazy);
   const [loaded, setLoaded] = useState(false);
   const titleRef = useRef(null);
 
