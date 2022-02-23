@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import axios from "axios";
 import Loader from "../Loading";
 
@@ -7,19 +7,20 @@ import GitLogo from "../../assets/gitIcon.png";
 import { verifySaveRepo } from "../verifySaveRepo";
 
 function RepoSearch({ savedRepos, setSavedRepos }) {
-  const [userInput, setUserInput] = useState("");
   const [repositoryList, setRepositoryList] = useState([]);
   const [loadingState, setLoadingState] = useState(0);
   const [endView, setEndView] = useState(10);
   const [modalState, setModalState] = useState(false);
   const [modalContent, setModalContent] = useState("");
+  const searchWordInputRef = useRef("");
+
   const getRepositoryData = async () => {
     try {
       const res = await axios.get(
         "https://api.github.com/search/repositories",
         {
           params: {
-            q: userInput,
+            q: searchWordInputRef.current.value,
           },
         },
       );
@@ -30,8 +31,16 @@ function RepoSearch({ savedRepos, setSavedRepos }) {
     }
   };
 
+  const enterKeyControl = event => {
+    if (searchWordInputRef.current.value) {
+      if (event.key === "Enter") {
+        getRepositoryData();
+      }
+    }
+  };
+
   const handleSearchClick = () => {
-    if (userInput === "") {
+    if (searchWordInputRef.current.value === "") {
       return 0;
     }
 
@@ -94,9 +103,8 @@ function RepoSearch({ savedRepos, setSavedRepos }) {
             type="text"
             name="repositorySearch"
             placeholder="search..."
-            onChange={e => {
-              setUserInput(e.target.value);
-            }}
+            onKeyDown={enterKeyControl}
+            ref={searchWordInputRef}
           />
           <S.RepoSearchButton onClick={handleSearchClick}>
             검색
