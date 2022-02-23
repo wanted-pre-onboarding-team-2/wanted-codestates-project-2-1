@@ -20,6 +20,16 @@ const RepoSave = styled.div`
 `;
 
 function Home() {
+  const handleSaveRepo = repoName => {
+    const isValid = verifySaveRepo(savedRepos, repoName);
+    isValid && setSavedRepos([...savedRepos, repoName]);
+  };
+
+  const handleDeleteRepo = name => {
+    const newRepo = savedRepos.filter(item => item !== name);
+    setSavedRepos(newRepo);
+  };
+  const [savedRepos, setSavedRepos] = useLocalStorage("repo", []);
   return (
     <HomeWrap>
       <FlexBox>
