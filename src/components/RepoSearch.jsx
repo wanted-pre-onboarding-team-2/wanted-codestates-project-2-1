@@ -103,7 +103,7 @@ function RepoSearch({ savedRepos, setSavedRepos }) {
     }
     setLoadingState(1);
     axios
-      .get("http://api.github.com/search/repositories", {
+      .get("https://api.github.com/search/repositories", {
         params: {
           q: userInput,
         },
