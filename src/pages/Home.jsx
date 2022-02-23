@@ -1,60 +1,47 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
-import axios from "axios";
-import { Link } from "react-router-dom";
+import RepoSearch from "../Components/RepoSearch";
+import { useLocalStorage } from "../hooks/useLocalStorage";
 
-// components
-const RepoSearchContainer = styled.div``;
-const RepoSearchInput = styled.input``;
-const RepoSearchButton = styled.button``;
-const RepoSearchResult = styled.div``;
+const HomeWrap = styled.div`
+  max-width: 800px;
+  margin: 0 auto;
+`;
+const FlexBox = styled.div`
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1em;
+`;
+const RepoSave = styled.div`
+  display: flex;
+  flex-direction: column;
+  flex-basis: 200px;
+`;
 
 function Home() {
-  // states
-  const [userInput, setUserInput] = useState("");
-  const [repositoryList, setRepositoryList] = useState([]);
-
-  const getRepositoryData = () => {
-    axios
-      .get("http://api.github.com/search/repositories", {
-        params: {
-          q: userInput,
-        },
-      })
-      .then(response => {
-        setRepositoryList(response.data.items);
-        console.log(response.data.items);
-        console.log(repositoryList);
-      })
-      .catch(Error => {
-        console.log(Error);
-      });
+  const [savedRepos, setSavedRepos] = useLocalStorage("repo", []);
+  const handleDeleteRepo = name => {
+    const newRepo = savedRepos.filter(item => item !== name);
+    setSavedRepos(newRepo);
   };
-
   return (
-    <>
-      <RepoSearchContainer>
-        <div>
-          <RepoSearchInput
-            type="text"
-            name="repositorySearch"
-            onChange={e => {
-              setUserInput(e.target.value);
-            }}
-          />
-          <RepoSearchButton onClick={getRepositoryData}>검색</RepoSearchButton>
-        </div>
-        <RepoSearchResult className="search-result-container">
-          {repositoryList.map((value, index) => (
-            <div key={index}>
-              <Link to={`/issues/${value.full_name.split("/").join("-")}`}>
-                {value.full_name}
-              </Link>
-            </div>
+    <HomeWrap>
+      <FlexBox>
+        <RepoSearch savedRepos={savedRepos} setSavedRepos={setSavedRepos} />
+        <RepoSave>
+          {savedRepos.map((val, idx) => (
+            <ul key={idx}>
+              <li>
+                {val}
+                <button onClick={() => handleDeleteRepo(val)}>삭제</button>
+              </li>
+            </ul>
           ))}
-        </RepoSearchResult>
-      </RepoSearchContainer>
-    </>
+        </RepoSave>
+      </FlexBox>
+    </HomeWrap>
   );
 }
 
