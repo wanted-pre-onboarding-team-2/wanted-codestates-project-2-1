@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import RepoSearch from "../Components/RepoSearch";
+import RepoSearch from "../components/RepoSearch";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 
 const HomeWrap = styled.div`

@@ -26,3 +26,5 @@ export const Avatar = styled.img`
 export const Date = styled.span`
   font-size: 1rem;
 `;
+
+export const Container = styled.div``;

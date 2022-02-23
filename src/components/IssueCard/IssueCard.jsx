@@ -1,5 +1,4 @@
 import React from "react";
-
 import * as S from "./style";
 
 function IssueCard({ issue, repoInfo }) {
