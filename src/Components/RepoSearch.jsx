@@ -49,13 +49,13 @@ const RepoSearchResult = styled.div`
     height: calc(100vh - 300px);
   }
 `;
-const GitIcon = styled.img`
+export const GitIcon = styled.img`
   display: inline-block;
   width: 20px;
   height: 20px;
   margin-right: 10px;
 `;
-const RepoSearchItem = styled.div`
+export const RepoSearchItem = styled.div`
   border: 1px solid;
   border-radius: 5px;
   display: flex;
@@ -72,7 +72,7 @@ const MoreButton = styled.button`
   border: 1px solid black;
   border-radius: 5px;
 `;
-const RepoSearchItemList = styled.li`
+export const RepoSearchItemList = styled.li`
   list-style: none;
   display: flex;
   align-items: center;
