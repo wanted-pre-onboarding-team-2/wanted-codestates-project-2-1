@@ -78,6 +78,14 @@ const RepoSearchItemList = styled.li`
   align-items: center;
 `;
 
+const RepoSearchItemName = styled.p`
+  display: block;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  width: 90%;
+`;
+
 function RepoSearch({ savedRepos, setSavedRepos }) {
   // state
   const [userInput, setUserInput] = useState("");
@@ -163,7 +171,7 @@ function RepoSearch({ savedRepos, setSavedRepos }) {
                 >
                   <RepoSearchItemList>
                     <GitIcon src={GitLogo} />
-                    <p>{value.full_name}</p>
+                    <RepoSearchItemName>{value.full_name}</RepoSearchItemName>
                   </RepoSearchItemList>
                   {/* TODO : 여기에 추가해주세요! */}
                   <button onClick={() => handleSaveRepo(value.full_name)}>
