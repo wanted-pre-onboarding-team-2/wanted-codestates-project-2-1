@@ -1,5 +1,7 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
+
 import RepoSearch from "../components/RepoSearch";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 
@@ -31,14 +33,19 @@ function Home() {
       <FlexBox>
         <RepoSearch savedRepos={savedRepos} setSavedRepos={setSavedRepos} />
         <RepoSave>
-          {savedRepos.map((val, idx) => (
-            <ul key={idx}>
-              <li>
-                {val}
-                <button onClick={() => handleDeleteRepo(val)}>삭제</button>
-              </li>
+          <nav>
+            <ul>
+              {savedRepos.map((val, idx) => {
+                const [owner, repo] = val.split("/");
+                return (
+                  <li key={idx}>
+                    <Link to={`/issues/${owner}-${repo}`}>{val}</Link>
+                    <button onClick={() => handleDeleteRepo(val)}>삭제</button>
+                  </li>
+                );
+              })}
             </ul>
-          ))}
+          </nav>
         </RepoSave>
       </FlexBox>
     </HomeWrap>

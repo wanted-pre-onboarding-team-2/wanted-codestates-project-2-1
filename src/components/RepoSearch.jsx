@@ -78,6 +78,7 @@ const RepoSearchItemList = styled.li`
   align-items: center;
 `;
 
+
 const RepoSearchItemName = styled.p`
   display: block;
   text-overflow: ellipsis;
@@ -171,7 +172,9 @@ function RepoSearch({ savedRepos, setSavedRepos }) {
                 >
                   <RepoSearchItemList>
                     <GitIcon src={GitLogo} />
-                    <RepoSearchItemName>{value.full_name}</RepoSearchItemName>
+
+                    <p>{value.full_name}</p>
+
                   </RepoSearchItemList>
                   {/* TODO : 여기에 추가해주세요! */}
                   <button onClick={() => handleSaveRepo(value.full_name)}>
