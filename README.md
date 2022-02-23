@@ -42,7 +42,7 @@ Enter 키와 검색 버튼을 통하여 검색을 실행할 수 있도록 구현
 통신 후 응답받은 데이터를 출력하기 전에 [react-loader-spinner](https://mhnpd.github.io/react-loader-spinner/)를 활용한 로딩을 구현하였습니다. 출력된 목록은 전체 목록이 출력되어 페이지가 길어진다는 문제점이 있어 처음 10개만 보여지고 사용자가 더보기 버튼을 누르게 될 경우 이후의 30개가 보여지도록 구현하였습니다.
 <br>
 
-**Repository LocalStorage 등록 및 삭제**
+🔥**Repository LocalStorage 등록 및 삭제**
 <br/><br/> 
 <img src="https://user-images.githubusercontent.com/89959952/155331980-6817f9c6-4ea9-4c0c-8035-ea66335e3df4.gif" width="500px" height="300px" title="local" alt="local"></img>
 <br/>
