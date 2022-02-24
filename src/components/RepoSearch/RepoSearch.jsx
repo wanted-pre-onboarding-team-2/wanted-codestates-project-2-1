@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import axios from "axios";
 import Loader from "../Loading";
 
@@ -7,13 +7,40 @@ import GitLogo from "../../assets/gitIcon.png";
 import { verifySaveRepo } from "../verifySaveRepo";
 
 function RepoSearch({ savedRepos, setSavedRepos }) {
-  const [userInput, setUserInput] = useState("");
   const [repositoryList, setRepositoryList] = useState([]);
   const [loadingState, setLoadingState] = useState(0);
   const [endView, setEndView] = useState(10);
+  const [modalState, setModalState] = useState(false);
+  const [modalContent, setModalContent] = useState("");
+  const searchWordInputRef = useRef("");
 
-  const getRepositoryData = () => {
-    if (userInput === "") {
+  const getRepositoryData = async () => {
+    try {
+      const res = await axios.get(
+        "https://api.github.com/search/repositories",
+        {
+          params: {
+            q: searchWordInputRef.current.value,
+          },
+        },
+      );
+      setRepositoryList(res.data.items);
+      setLoadingState(0);
+    } catch (err) {
+      console.error(Error);
+    }
+  };
+
+  const enterKeyControl = event => {
+    if (searchWordInputRef.current.value) {
+      if (event.key === "Enter") {
+        getRepositoryData();
+      }
+    }
+  };
+
+  const handleSearchClick = () => {
+    if (searchWordInputRef.current.value === "") {
       return 0;
     }
 
@@ -21,19 +48,8 @@ function RepoSearch({ savedRepos, setSavedRepos }) {
       setEndView(10);
     }
     setLoadingState(1);
-    axios
-      .get("https://api.github.com/search/repositories", {
-        params: {
-          q: userInput,
-        },
-      })
-      .then(response => {
-        setRepositoryList(response.data.items);
-        setLoadingState(0);
-      })
-      .catch(Error => {
-        console.error(Error);
-      });
+
+    getRepositoryData();
   };
 
   const handleMoreView = e => {
@@ -49,24 +65,48 @@ function RepoSearch({ savedRepos, setSavedRepos }) {
 
   const handleSaveRepo = repoName => {
     const isValid = verifySaveRepo(savedRepos, repoName);
-    isValid && setSavedRepos([...savedRepos, repoName]);
+    if (isValid === "overflow") {
+      setModalContent("4개 이상 저장하실 수 없습니다. 😅");
+
+      setModalState(true);
+    } else if (isValid === "already") {
+      setModalContent("이미 저장되었습니다. 😅");
+      setModalState(true);
+    } else {
+      setSavedRepos([...savedRepos, repoName]);
+    }
   };
 
   return (
     <>
+      {modalState && (
+        <>
+          <S.ModalWrap>
+            <S.ModalCard>
+              <S.ModalContentWrap>
+                <S.ModalContent>{modalContent}</S.ModalContent>
+              </S.ModalContentWrap>
+              <S.ModalCloseBtn
+                type="button"
+                onClick={() => setModalState(false)}
+              >
+                닫기
+              </S.ModalCloseBtn>
+            </S.ModalCard>
+          </S.ModalWrap>
+          <S.modalBackground></S.modalBackground>
+        </>
+      )}
       <S.RepoSearchContainer>
-        <h1>Github issue searcher</h1>
         <S.RepoSearchWrap>
           <S.RepoSearchInput
             type="text"
             name="repositorySearch"
             placeholder="search..."
-            // FIXME: useRef 로 수정.
-            onChange={e => {
-              setUserInput(e.target.value);
-            }}
+            onKeyDown={enterKeyControl}
+            ref={searchWordInputRef}
           />
-          <S.RepoSearchButton onClick={getRepositoryData}>
+          <S.RepoSearchButton onClick={handleSearchClick}>
             검색
           </S.RepoSearchButton>
         </S.RepoSearchWrap>

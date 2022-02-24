@@ -1,6 +1,8 @@
 import React from "react";
 import * as S from "./style";
 
+import { convertDataIntoAgo } from "../../util/convertDataIntoAgo";
+
 function IssueCard({ issue, repoInfo }) {
   const { html_url, title, user, created_at } = issue;
 
@@ -9,7 +11,7 @@ function IssueCard({ issue, repoInfo }) {
       <S.Title>{title}</S.Title>
       <S.RepoName>{repoInfo}</S.RepoName>
       <S.Avatar src={user.avatar_url} />
-      <S.Date>{created_at}</S.Date>
+      <S.Date>{convertDataIntoAgo(created_at)}</S.Date>
     </S.Card>
   );
 }
