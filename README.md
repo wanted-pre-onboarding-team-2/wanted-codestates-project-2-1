@@ -40,6 +40,17 @@ Enter 키와 검색 버튼을 통하여 검색을 실행할 수 있도록 구현
 
 통신 후 응답받은 데이터를 출력하기 전에 [react-loader-spinner](https://mhnpd.github.io/react-loader-spinner/)를 활용한 로딩을 구현하였습니다. 출력된 목록은 전체 목록이 출력되어 페이지가 길어진다는 문제점이 있어 처음 10개만 보여지고 사용자가 더보기 버튼을 누르게 될 경우 이후의 30개가 보여지도록 구현하였습니다.
 
+🔥**Repository LocalStorage 등록 및 삭제**
+<br/><br/> 
+<img src="https://user-images.githubusercontent.com/89959952/155449060-11be1939-8e47-4745-a689-6399b9afdaa7.gif" width="500px" height="300px" title="local" alt="local"></img>
+<br/>
+- **구현한 방법과 이유**
+> 1. 검색된 Public Repository를 **등록**할 수 있다.
+>    - 등록 개수는 최대 4개로 제한하며, 최대 개수 초과 등록 시 이를 사용자에게 알려준다.
+>    - 웹은 **LocalStorage**, 앱은 Async Storage 등 로컬 저장소를 활용한다. (웹 혹은 앱 선택)
+> 2. 등록된 Repository를 **삭제**할 수 있다. 
+ 
+<br/> 
 
 ![ezgif com-gif-maker (6)](https://user-images.githubusercontent.com/54930877/155452605-db89f1d1-7e3f-4b1c-b731-9212da1356bf.gif)
 
@@ -77,7 +88,23 @@ Enter 키와 검색 버튼을 통하여 검색을 실행할 수 있도록 구현
 - [최종 feature 브랜치](https://github.com/hhhminme/wanted-codestates-project-2-1/tree/Feature-RepoAddAndDelete)
   
  
-### Issue page - 담당자 이름
+
+### Issue page
+
+- 요구사항 4번에 대한 기능을 하고 있습니다. ([전호용](https://github.com/lmooroom), [이장민](https://github.com/leo-xee), [오카무라카에](https://github.com/kaehehehe))
+- 각 issue마다 제목, Repository명을 포함한 추가적인 데이터 출력
+- 페이지네이션을 통해 issue 모아보기 
+- 해당 issue 클릭 시에 Github의 상세 페이지로 이동
+
+#### 🔥 각 issue마다 제목, Repository명을 포함한 추가적인 데이터 출력과 페이지네이션을 통한 issue 모아보기
+
+![payHere_demo1](https://user-images.githubusercontent.com/21965795/155453090-bd07558c-8d5d-49df-8966-22be85caf863.gif)
+
+
+#### 🔥 해당 issue 클릭 시에 Github의 상세 페이지로 이동
+
+![payHere_demo2](https://user-images.githubusercontent.com/21965795/155453111-3ce602c8-37ca-4d55-8c2f-50ef4c1bd806.gif)
+
 
 <br />
 
