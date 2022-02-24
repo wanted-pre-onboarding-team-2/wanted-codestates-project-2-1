@@ -136,7 +136,22 @@ export const useLocalStorage = (key, initialValue) => {
 
  
 
-### Issue page - 담당자 이름
+### Issue page
+
+- 요구사항 4번에 대한 기능을 하고 있습니다. ([전호용](https://github.com/lmooroom), [이장민](https://github.com/leo-xee), [오카무라카에](https://github.com/kaehehehe))
+- 각 issue마다 제목, Repository명을 포함한 추가적인 데이터 출력
+- 페이지네이션을 통해 issue 모아보기 
+- 해당 issue 클릭 시에 Github의 상세 페이지로 이동
+
+#### 🔥 각 issue마다 제목, Repository명을 포함한 추가적인 데이터 출력과 페이지네이션을 통한 issue 모아보기
+
+![payHere_demo1](https://user-images.githubusercontent.com/21965795/155453090-bd07558c-8d5d-49df-8966-22be85caf863.gif)
+
+
+#### 🔥 해당 issue 클릭 시에 Github의 상세 페이지로 이동
+
+![payHere_demo2](https://user-images.githubusercontent.com/21965795/155453111-3ce602c8-37ca-4d55-8c2f-50ef4c1bd806.gif)
+
 
 <br />
 
