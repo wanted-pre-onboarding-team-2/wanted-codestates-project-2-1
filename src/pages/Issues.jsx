@@ -23,6 +23,11 @@ const CardContainer = styled.div`
   margin-bottom: 50px;
 `;
 
+const Message = styled.div`
+  width: 100%;
+  font-size: 30px;
+`;
+
 const HomeButton = styled(Link)`
   background: #2da44e;
   padding: 10px;
@@ -75,10 +80,13 @@ function Issues() {
       <Container>
         <PageTitle>{repoInfo && `${owner}/${repo}`} ISSUES</PageTitle>
         <CardContainer>
-          {issues &&
+          {issues ? (
             issues.map((issue, idx) => (
               <IssueCard key={idx + 1} issue={issue} repoInfo={repoInfo} />
-            ))}
+            ))
+          ) : (
+            <Message>There are no issues</Message>
+          )}
         </CardContainer>
 
         {issues && (
