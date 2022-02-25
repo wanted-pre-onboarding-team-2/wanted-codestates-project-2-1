@@ -101,16 +101,16 @@ Enter 키와 검색 버튼을 통하여 검색을 실행할 수 있도록 구현
 ![payHere_demo1](https://user-images.githubusercontent.com/21965795/155453090-bd07558c-8d5d-49df-8966-22be85caf863.gif)
 
 - **구현한 방법과 이유**
-> 1. 각 repository에 등록되어 있는 issue들을 불러와 카드 형식으로 보여준다.
->    - issue들의 갯수를 사전에 파악하여 전체 페이지네이션 될 목록을 계산한다.
->    - 다음 페이지 클릭 시 api parameter인 page 속성을 활용하여 next page data를 요청한다.
+각 repository에 등록되어 있는 issue들을 불러와 카드 형식으로 보여준다.
+ - issue들의 갯수를 사전에 파악하여 전체 페이지네이션 될 목록을 계산한다.
+ - 다음 페이지 클릭 시 api parameter인 page 속성을 활용하여 next page data를 요청한다.
 
 #### 🔥 해당 issue 클릭 시에 Github의 상세 페이지로 이동
 
 ![payHere_demo2](https://user-images.githubusercontent.com/21965795/155453111-3ce602c8-37ca-4d55-8c2f-50ef4c1bd806.gif)
 
 - **구현한 방법과 이유**
-> 1. issue카드 클릭시 저장된 url로 이동한다.
+issue카드 클릭시 저장된 url로 이동한다.
 
 <br />
 
