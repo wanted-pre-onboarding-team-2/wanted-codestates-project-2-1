@@ -114,6 +114,10 @@ issue카드 클릭시 저장된 url로 이동한다.
 
 <br />
 
+### 리팩토링 및 선능 개선
+#### [오카무라카에](https://github.com/kaehehehe), [박상우](https://github.com/SangWoo9734)
+
+
 ## 팀원 소개
 
 | 이름         | 깃허브                                         | 
