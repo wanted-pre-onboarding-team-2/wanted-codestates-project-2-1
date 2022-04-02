@@ -118,13 +118,17 @@ issue카드 클릭시 저장된 url로 이동한다.
 #### [오카무라카에](https://github.com/kaehehehe), [박상우](https://github.com/SangWoo9734)
 
 #### 1. 컴포넌트 화
-<p>컴포넌트화가 안되어 있는 부분을 컴포넌트 단위로 나누었습니다.</p>
+- 기존 하나의 컴포넌트에서 RepoSearchBar, RepoItem, RepoSave로 각각 컴포넌트 단위로 나누었습니다. 컴포넌트화를 통해 React.memo를 통해 랜더링 최적화를 적용할 수 있었습니다.
 
-#### 2. 반응형 웹
-<p>반응형 웹이 되도록 수정했습니다.</p>
+#### 2. 디렉토리 구조화
+- 기존 단일 파일로 관리하던 컴포넌트를 컴포넌트와 동일한 이름의 폴더 내부에서 styel 코드와 컴포넌트 코드를 개별적으로 관리할 수 있도록 했습니다.
 
 #### 3. 성능 개선
-#### 4. issue 갯수에 따라 페이지네이션 길이 달라지도록 구현
+- React.memo를 통해 불필요한 컴포넌트 랜더링을 최적화해주었습니다.
+
+#### 4. 그 외
+- issue 갯수에 따라 페이지네이션 버튼의 개수를 유동적으로 처리해주었습니다.
+- 메인 페이지에 대해서 반응형 웹을 적용시켰습니다.
 
 ## 팀원 소개
 
@@ -136,4 +140,4 @@ issue카드 클릭시 저장된 url로 이동한다.
 | 이장민       | [leo-xee](https://github.com/leo-xee)         | 
 | 오카무라카에 | [kaehehehe](https://github.com/kaehehehe)       | 
 | 허민         | [hhhminme](https://github.com/hhhminme)       | 
-| 전호용       | [mooroom](https://github.com/mooroom)          | 
+| 전호용       | [mooroom](https://github.com/mooroom)         | 
